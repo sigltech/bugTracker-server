@@ -6,6 +6,7 @@ class Bugs(db.Model):
     completed = db.Column(db.Boolean, nullable=False)
     tag = db.Column(db.String(500), nullable=False)
     importance = db.Column(db.String(5), nullable=False)
+    team = db.Column(db.String(80), nullable=False)
     username = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
 
     def __init__(self, id, description, completed, tag, importance, username):
