@@ -43,6 +43,7 @@ def index():
         return jsonify([*map(bugs_serializer, all_bugs)]),200
     else:
         content = request.json
+        print(content)
         bug = Bugs(
             id = f'{uuid.uuid1()}',
             description = content["description"],

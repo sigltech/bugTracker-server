@@ -9,10 +9,11 @@ class Bugs(db.Model):
     team = db.Column(db.String(80), nullable=False)
     username = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
 
-    def __init__(self, id, description, completed, tag, importance, username):
+    def __init__(self, id, description, completed, tag, importance, username, team):
         self.id = id
         self.description = description
         self.completed = completed
         self.tag = tag
         self.importance = importance
         self.username = username
+        self.team = team
