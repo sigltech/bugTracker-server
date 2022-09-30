@@ -50,6 +50,12 @@ def create():
     if request.method == "POST":
         try:
             content = request.json
+            print(content)
+            print(content["username"])
+            print(content["email"])
+            print(content["password"])
+            print(content["firstname"])
+            
             hashed_password = generate_password_hash(content["password"], method='sha256')
             hashed_password_confirmation = generate_password_hash(content["passwordConfirmation"], method='sha256')
             user = users.User(

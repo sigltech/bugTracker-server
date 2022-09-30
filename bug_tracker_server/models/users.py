@@ -5,8 +5,8 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     firstname = db.Column(db.String(200), nullable=False)
-    password = db.Column(db.String(80), nullable=False)
-    passwordConfirmation = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
+    passwordConfirmation = db.Column(db.String(256), nullable=False)
 
     def __init__(self, id, username, email, firstname, password, passwordConfirmation):
         self.id = id

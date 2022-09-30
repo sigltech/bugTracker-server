@@ -35,7 +35,9 @@ def index():
                 "description": bug.description,
                 "completed": bug.completed,
                 "tag": bug.tag,
-                "username": bug.username
+                "username": bug.username,
+                "importance": bug.importance,
+                "team": bug.team
             }
         all_bugs = Bugs.query.all()
         return jsonify([*map(bugs_serializer, all_bugs)]),200
@@ -46,7 +48,9 @@ def index():
             description = content["description"],
             completed = content["completed"],
             tag=content["tag"],
-            username = content["username"]
+            username = content["username"],
+            importance = content["importance"],
+            team = content["team"]
         )
         db.session.add(bug)
         db.session.commit()
