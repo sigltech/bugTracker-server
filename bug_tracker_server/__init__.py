@@ -6,12 +6,17 @@ from flask_cors import CORS
 load_dotenv()
 database_uri = environ.get('DATABASE_URL')
 
+if 'postgres:' in database_uri:
+    database_uri = database_uri.replace("postgres:", "postgresql:")
+
 app = Flask(__name__)
 app.config.update(
     SQLALCHEMY_DATABASE_URI=database_uri,
     SQLALCHEMY_TRACK_MODIFICATIONS=environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
 )
 app.config['SECRET_KEY']=environ.get('SECRET_KEY')
+
+
 
 from .database.db import db
 from .routes.main import main_routes

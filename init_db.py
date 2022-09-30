@@ -1,5 +1,5 @@
-from habit_tracker_server import db
-from habit_tracker_server.models import users
+from bug_tracker_server import db
+from bug_tracker_server.models import users
 
 # Clear it all out
 
