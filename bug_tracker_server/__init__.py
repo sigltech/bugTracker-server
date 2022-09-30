@@ -6,8 +6,8 @@ from flask_cors import CORS
 load_dotenv()
 database_uri = environ.get('DATABASE_URL')
 
-if 'postgres:' in database_uri:
-    database_uri = database_uri.replace("postgres:", "postgresql:")
+# if 'postgres:' in database_uri:
+#     database_uri = database_uri.replace("postgres:", "postgresql:")
 
 app = Flask(__name__)
 app.config.update(
