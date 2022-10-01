@@ -34,9 +34,9 @@ def teams():
                 "id": team.id,
                 "name": team.name,
                 "description": team.description,
-                "members": team.completed,
-                "owner": team.tag,
-                "bugs": team.username
+                "members": team.members,
+                "owner": team.owner,
+                "bugs": team.bugs
             }
         all_teams = Teams.query.all()
         return jsonify([*map(teams_serializer, all_teams)]),200
@@ -46,9 +46,9 @@ def teams():
             id = f'{uuid.uuid1()}',
             name = content["name"],
             description = content["description"],
-            completed = content["completed"],
-            tag=content["tag"],
-            username = content["username"]
+            members = content["members"],
+            owner=content["owner"],
+            bugs = content["bugs"]
         )
         db.session.add(team)
         db.session.commit()

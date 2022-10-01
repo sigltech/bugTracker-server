@@ -7,6 +7,8 @@ class Teams(db.Model):
     members = db.Column(db.String(500), nullable=False)
     owner = db.Column(db.String(80), nullable=False)
     bugs = db.Column(db.String(500), nullable=False)
+    tester = db.Column
+
 
     def __init__(self, id, name, description, members, owner, bugs):
         self.id = id
