@@ -34,9 +34,9 @@ def teams():
                 "id": team.id,
                 "name": team.name,
                 "description": team.description,
-                "completed": team.completed,
-                "tag": team.tag,
-                "username": team.username
+                "members": team.completed,
+                "owner": team.tag,
+                "bugs": team.username
             }
         all_teams = Teams.query.all()
         return jsonify([*map(teams_serializer, all_teams)]),200
