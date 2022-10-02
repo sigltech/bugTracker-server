@@ -64,7 +64,8 @@ def create():
                 password = hashed_password,
                 passwordConfirmation = hashed_password_confirmation,
                 firstname = content["name"],
-                email = content["email"]
+                email = content["email"],
+                user_type = content["userType"]
             )
 
             db.session.add(user)
@@ -78,14 +79,11 @@ def login_user():
 
     # Check that login request was sent with basic auth
     auth = request.authorization
-    # print(auth.password)
+
     if not auth or not auth.username or not auth.password: 
         return make_response('could not verify basic auth', 401, {'Authentication': 'login required"'})   
     
     user = users.User.query.filter_by(username=auth.username).first()  
-    # print(user)
-    # print(user.password)
-    # print(check_password_hash(user.password, auth.password))
     if check_password_hash(user.password, auth.password):
         token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=45)}, app.config['SECRET_KEY'], "HS256"), {"user_id": user.id, "username": user.username}
         return jsonify({'token': token}), 200
