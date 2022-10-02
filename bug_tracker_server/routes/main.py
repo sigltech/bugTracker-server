@@ -32,12 +32,13 @@ def index():
         def bugs_serializer(bug):
             return {
                 "id": bug.id,
+                "title": bug.title,
                 "description": bug.description,
-                "completed": bug.completed,
+                "status": bug.status,
                 "tag": bug.tag,
-                "username": bug.username,
-                "importance": bug.importance,
-                "team": bug.team
+                "priority": bug.priority,
+                "team": bug.team,
+                "assigned_user": bug.assigned_user
             }
         all_bugs = Bugs.query.all()
         return jsonify([*map(bugs_serializer, all_bugs)]),200
@@ -46,12 +47,13 @@ def index():
         print(content)
         bug = Bugs(
             id = f'{uuid.uuid1()}',
+            title = content["title"],
             description = content["description"],
-            completed = content["completed"],
-            tag=content["tag"],
-            username = content["username"],
-            importance = content["importance"],
-            team = content["team"]
+            status = content["status"],
+            tag = content["tag"],
+            priority = content["priority"],
+            team = content["team"],
+            assigned_user = content["assigned_user"]
         )
         db.session.add(bug)
         db.session.commit()
