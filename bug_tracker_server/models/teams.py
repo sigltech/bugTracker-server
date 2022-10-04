@@ -1,6 +1,7 @@
 from ..database.db import db
 
-class Teams(db.Model):
+class Team(db.Model):
+    __tablename__ = 'teams'
     id = db.Column(db.String(80), primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(120), nullable=False)

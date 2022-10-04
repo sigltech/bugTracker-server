@@ -22,6 +22,9 @@ from .database.db import db
 from .routes.main import main_routes
 from .routes.users import user_routes
 from .routes.teams import teams_routes
+from .routes.projects import projects_routes
+from .routes.projects_access import projects_access_routes
+
 
 load_dotenv()
 database_uri = environ.get('DATABASE_URL')
@@ -35,6 +38,8 @@ db.init_app(app)
 app.register_blueprint(main_routes)
 app.register_blueprint(user_routes)
 app.register_blueprint(teams_routes)
+app.register_blueprint(projects_routes)
+app.register_blueprint(projects_access_routes)
 
 if __name__ == '__main__':
     port = int(environ.get("PORT", 5000))
