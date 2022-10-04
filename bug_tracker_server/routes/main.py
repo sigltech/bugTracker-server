@@ -38,7 +38,8 @@ def index():
                 "tag": bug.tag,
                 "priority": bug.priority,
                 "team": bug.team,
-                "assigned_user": bug.assigned_user
+                "assigned_user": bug.assigned_user,
+                "date": bug.date
             }
         all_bugs = Bugs.query.all()
         return jsonify([*map(bugs_serializer, all_bugs)]),200
@@ -53,7 +54,8 @@ def index():
             tag = content["tag"],
             priority = content["priority"],
             team = content["team"],
-            assigned_user = content["assigned_user"]
+            assigned_user = content["assigned_user"],
+            date = datetime.datetime.utcnow()
         )
         db.session.add(bug)
         db.session.commit()
@@ -70,7 +72,7 @@ def change_todo(id):
         return jsonify({"message": "Bug updated successfully."}), 200
     elif request.method == "GET":
         bug = Bugs.query.filter_by(id=id).first()
-        return jsonify({"id": bug.id, "title": bug.title, "description": bug.description,"status": bug.status, "tag": bug.tag ,"priority": bug.priority, "assigned_user": bug.assigned_user, "team": bug.team}), 200
+        return jsonify({"id": bug.id, "title": bug.title, "description": bug.description,"status": bug.status, "tag": bug.tag ,"priority": bug.priority, "assigned_user": bug.assigned_user, "team": bug.team, "date": bug.date}), 200
     else:
         bug = Bugs.query.filter_by(id=id).first()
         db.session.delete(bug)
