@@ -9,7 +9,7 @@ class Bugs(db.Model):
     priority = db.Column(db.String(15), nullable=False)
     team = db.Column(db.String(80), db.ForeignKey('teams.name'))
     assigned_user = db.Column(db.String(80), db.ForeignKey('user.username'))
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now())
 
     def __init__(self, id, title, description, status, tag, priority, assigned_user, team, date):
         self.id = id

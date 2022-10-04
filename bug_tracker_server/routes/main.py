@@ -54,8 +54,7 @@ def index():
             tag = content["tag"],
             priority = content["priority"],
             team = content["team"],
-            assigned_user = content["assigned_user"],
-            date = datetime.datetime.utcnow()
+            assigned_user = content["assigned_user"]
         )
         db.session.add(bug)
         db.session.commit()
