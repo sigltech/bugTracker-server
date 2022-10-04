@@ -39,12 +39,12 @@ def index():
                 "priority": ticket.priority,
                 "team": ticket.team,
                 "assigned_user": ticket.assigned_user,
-                "created_on": ticket.created_on,
+                # "created_on": ticket.created_on,
                 "created_by": ticket.created_by,
-                "closed_on": ticket.closed_on,
-                "closed_by": ticket.closed_by,
-                "updated_on": ticket.updated_on,
-                "updated_by": ticket.updated_by
+                # "closed_on": ticket.closed_on,
+                # "closed_by": ticket.closed_by,
+                # "updated_on": ticket.updated_on,
+                # "updated_by": ticket.updated_by
             }
         all_tickets = Ticket.query.all()
         return jsonify([*map(tickets_serializer, all_tickets)]),200
