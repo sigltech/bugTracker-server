@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, make_response, current_app as app
-from ..models.teams import Teams
+from ..models.teams import Team
 from ..database.db import db
 from functools import wraps
 import uuid
@@ -19,7 +19,7 @@ def token_required(f):
             return jsonify({'message': 'a valid token is missing'})
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            current_user = Teams.query.filter_by(id=data['id']).first()
+            current_user = Team.query.filter_by(id=data['id']).first()
         except:
             return jsonify({'message': 'token is invalid'})
         return f(current_user, *args, **kwargs)
@@ -38,11 +38,11 @@ def teams():
                 "owner": team.owner,
                 "bugs": team.bugs
             }
-        all_teams = Teams.query.all()
+        all_teams = Team.query.all()
         return jsonify([*map(teams_serializer, all_teams)]),200
     else:
         content = request.json
-        team = Teams(
+        team = Team(
             id = f'{uuid.uuid1()}',
             name = content["name"],
             description = content["description"],

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, make_response, current_app as app
-from ..models.bug import Bugs
+from ..models.tickets import Ticket
 from ..database.db import db
 from functools import wraps
 import uuid
@@ -19,34 +19,39 @@ def token_required(f):
             return jsonify({'message': 'a valid token is missing'})
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            current_user = Bugs.query.filter_by(id=data['id']).first()
+            current_user = Ticket.query.filter_by(id=data['id']).first()
         except:
             return jsonify({'message': 'token is invalid'})
         return f(current_user, *args, **kwargs)
     return decorator  
 
-@main_routes.route("/bugs", methods=["GET", "POST"])
+@main_routes.route("/tickets", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
 
-        def bugs_serializer(bug):
+        def tickets_serializer(ticket):
             return {
-                "id": bug.id,
-                "title": bug.title,
-                "description": bug.description,
-                "status": bug.status,
-                "tag": bug.tag,
-                "priority": bug.priority,
-                "team": bug.team,
-                "assigned_user": bug.assigned_user,
-                "date": bug.date
+                "id": ticket.id,
+                "title": ticket.title,
+                "description": ticket.description,
+                "status": ticket.status,
+                "tag": ticket.tag,
+                "priority": ticket.priority,
+                "team": ticket.team,
+                "assigned_user": ticket.assigned_user,
+                "created_on": ticket.created_on,
+                "created_by": ticket.created_by,
+                "closed_on": ticket.closed_on,
+                "closed_by": ticket.closed_by,
+                "updated_on": ticket.updated_on,
+                "updated_by": ticket.updated_by
             }
-        all_bugs = Bugs.query.all()
-        return jsonify([*map(bugs_serializer, all_bugs)]),200
+        all_tickets = Ticket.query.all()
+        return jsonify([*map(tickets_serializer, all_tickets)]),200
     else:
         content = request.json
         print(content)
-        bug = Bugs(
+        ticket = Ticket(
             id = f'{uuid.uuid1()}',
             title = content["title"],
             description = content["description"],
@@ -55,26 +60,44 @@ def index():
             priority = content["priority"],
             team = content["team"],
             assigned_user = content["assigned_user"],
-            date = datetime.datetime.utcnow()
+            created_on = datetime.datetime.utcnow(),
+            created_by = content["created_by"],
+            closed_on = content["closed_on"],
+            closed_by = content["closed_by"],
+            updated_on = content["updated_on"],
+            updated_by = content["updated_by"]
         )
-        db.session.add(bug)
+        db.session.add(ticket)
         db.session.commit()
-        return jsonify({"message": "New bug added successfully."}), 201
+        return jsonify({"message": "New ticket added successfully."}), 201
 
-@main_routes.route("/bugs/<id>", methods=["GET","PUT", "DELETE"])
+@main_routes.route("/tickets/<id>", methods=["GET","PUT", "DELETE"])
 def change_todo(id):
     if request.method == "PUT":
         content = request.json
-        bug = Bugs.query.filter_by(id=id).first()
-        # bug.description = content["description"]
-        bug.completed = content["completed"]
+        ticket = Ticket.query.filter_by(id=id).first()
         db.session.commit()
-        return jsonify({"message": "Bug updated successfully."}), 200
+        return jsonify({"message": "Ticket updated successfully."}), 200
     elif request.method == "GET":
-        bug = Bugs.query.filter_by(id=id).first()
-        return jsonify({"id": bug.id, "title": bug.title, "description": bug.description,"status": bug.status, "tag": bug.tag ,"priority": bug.priority, "assigned_user": bug.assigned_user, "team": bug.team, "date": bug.date}), 200
+        ticket = Ticket.query.filter_by(id=id).first()
+        return jsonify({
+            "id": ticket.id, 
+            "title": ticket.title, 
+            "description": ticket.description,
+            "status": ticket.status, 
+            "tag": ticket.tag ,
+            "priority": ticket.priority, 
+            "assigned_user": ticket.assigned_user, 
+            "team": ticket.team, 
+            "created_by": ticket.created_by,
+            "created_on": ticket.created_on,
+            "closed_by": ticket.closed_by,
+            "closed_on": ticket.closed_on,
+            "updated_by": ticket.updated_by,
+            "updated_on": ticket.updated_on
+            }), 200
     else:
-        bug = Bugs.query.filter_by(id=id).first()
-        db.session.delete(bug)
+        ticket = Ticket.query.filter_by(id=id).first()
+        db.session.delete(ticket)
         db.session.commit()
-        return jsonify({"message": "Bug deleted successfully."}), 200
+        return jsonify({"message": "Ticket deleted successfully."}), 200
