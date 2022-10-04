@@ -62,7 +62,6 @@ def index():
             assigned_user = content["assigned_user"],
             created_by = content["created_by"],
             updated_by= content["updated_by"],
-            created_on = datetime.datetime.now(),
             updated_on = datetime.datetime.now(),
             closed_on = None,
             closed_by = None
