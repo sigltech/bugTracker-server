@@ -18,7 +18,7 @@ class Ticket(db.Model):
     # updated_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow())
     # updated_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
 
-    def __init__(self, id, title, description, status, tag, priority, assigned_user, team, created_by):
+    def __init__(self, id, title, description, status, tag, priority, assigned_user, team):
         self.id = id
         self.title = title
         self.description = description
@@ -27,7 +27,6 @@ class Ticket(db.Model):
         self.priority = priority
         self.assigned_user = assigned_user
         self.team = team
-        self.created_by = created_by
         # self.closed_on = closed_on
         # self.closed_by = closed_by
         # self.updated_on = updated_on
