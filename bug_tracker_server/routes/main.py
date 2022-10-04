@@ -60,12 +60,8 @@ def index():
             priority = content["priority"],
             team = content["team"],
             assigned_user = content["assigned_user"],
-            created_on = datetime.datetime.utcnow(),
             created_by = content["created_by"],
-            closed_on = content["closed_on"],
-            closed_by = content["closed_by"],
-            updated_on = content["updated_on"],
-            updated_by = content["updated_by"]
+            updated_by= content["updated_by"]
         )
         db.session.add(ticket)
         db.session.commit()
