@@ -11,7 +11,7 @@ class Ticket(db.Model):
     priority = db.Column(db.String(15), nullable=False)
     team = db.Column(db.String(80), db.ForeignKey('teams.name'))
     assigned_user = db.Column(db.String(80), db.ForeignKey('user.username'))
-    # created_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow())
+    created_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow())
     # created_by = db.Column(db.String(80), db.ForeignKey('user.username'))
     # closed_on = db.Column(db.DateTime, nullable=True)
     # closed_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=True)
