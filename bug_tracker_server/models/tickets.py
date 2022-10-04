@@ -27,6 +27,7 @@ class Ticket(db.Model):
         self.priority = priority
         self.assigned_user = assigned_user
         self.team = team
+        self.created_by = created_by
         self.closed_on = closed_on
         self.closed_by = closed_by
         self.updated_on = updated_on
