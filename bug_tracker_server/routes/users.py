@@ -72,6 +72,10 @@ def create():
             db.session.commit()
             return 'user added'
         except:
+            if(request.json["password"] != request.json["passwordConfirmation"]):
+                return jsonify({"message": "Passwords do not match."}), 500
+            elif(users.User.query.filter_by(username=request.json["username"]).first()):
+                return jsonify({"message": "Username already exists."}), 409
             return jsonify({"message": "There was an error creating the user"}), 500
 
 @user_routes.route('/login', methods=['POST']) 
