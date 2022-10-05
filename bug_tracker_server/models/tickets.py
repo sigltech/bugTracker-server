@@ -9,7 +9,7 @@ class Ticket(db.Model):
     status = db.Column(db.String(80), nullable=False)
     tag = db.Column(db.ARRAY(db.String(80)), nullable=False)
     priority = db.Column(db.String(15), nullable=False)
-    team = db.Column(db.String(80), db.ForeignKey('teams.name'))
+    # team = db.Column(db.String(80), db.ForeignKey('teams.name'))
     assigned_user = db.Column(db.String(80), db.ForeignKey('user.username'))
     created_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     created_by = db.Column(db.String(80), db.ForeignKey('user.username'))
@@ -17,8 +17,9 @@ class Ticket(db.Model):
     closed_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=True)
     updated_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     updated_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
+    project = db.Column(db.String(80), db.ForeignKey('projects.id'))
 
-    def __init__(self, id, title, description, status, tag, priority, assigned_user, team, created_by, updated_by, updated_on, closed_on, closed_by):
+    def __init__(self, id, title, description, status, tag, priority, assigned_user, created_by, updated_by, updated_on, closed_on, closed_by, project):
         self.id = id
         self.title = title
         self.description = description
@@ -26,7 +27,7 @@ class Ticket(db.Model):
         self.tag = tag
         self.priority = priority
         self.assigned_user = assigned_user
-        self.team = team
+        self.project = project
         self.created_by = created_by
         self.closed_on = closed_on
         self.closed_by = closed_by

@@ -21,7 +21,7 @@ app.config['SECRET_KEY']=environ.get('SECRET_KEY')
 from .database.db import db
 from .routes.main import main_routes
 from .routes.users import user_routes
-from .routes.teams import teams_routes
+# from .routes.teams import teams_routes
 from .routes.projects import projects_routes
 from .routes.projects_access import projects_access_routes
 
@@ -37,7 +37,7 @@ db.init_app(app)
 #register blueprints, so that the app can use them for routing
 app.register_blueprint(main_routes)
 app.register_blueprint(user_routes)
-app.register_blueprint(teams_routes)
+# app.register_blueprint(teams_routes)
 app.register_blueprint(projects_routes)
 app.register_blueprint(projects_access_routes)
 
