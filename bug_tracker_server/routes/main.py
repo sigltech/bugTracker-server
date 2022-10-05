@@ -43,7 +43,8 @@ def index():
                 "closed_on": ticket.closed_on,
                 "closed_by": ticket.closed_by,
                 "updated_on": ticket.updated_on,
-                "updated_by": ticket.updated_by
+                "updated_by": ticket.updated_by,
+                "project": ticket.project,
             }
         all_tickets = Ticket.query.all()
         return jsonify([*map(tickets_serializer, all_tickets)]),200
