@@ -65,6 +65,7 @@ def index():
             updated_on = datetime.datetime.utcnow(),
             closed_on = None,
             closed_by = None
+            project= None
 
         )
         db.session.add(ticket)
@@ -84,7 +85,7 @@ def change_todo(id):
         ticket.assigned_user = content["assigned_user"]
         ticket.updated_by = content["updated_by"]
         ticket.updated_on = datetime.datetime.utcnow()
-        
+
         db.session.commit()
         return jsonify({"message": "Ticket updated successfully."}), 200
     elif request.method == "GET":

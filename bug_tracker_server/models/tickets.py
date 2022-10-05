@@ -17,7 +17,7 @@ class Ticket(db.Model):
     closed_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=True)
     updated_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     updated_by = db.Column(db.String(80), db.ForeignKey('user.username'), nullable=False)
-    project = db.Column(db.String(80), db.ForeignKey('projects.id'))
+    project = db.Column(db.String(80), db.ForeignKey('projects.id'), nullable=True)
 
     def __init__(self, id, title, description, status, tag, priority, assigned_user, created_by, updated_by, updated_on, closed_on, closed_by, project):
         self.id = id
