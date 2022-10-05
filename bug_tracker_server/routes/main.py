@@ -64,7 +64,7 @@ def index():
             updated_by= content["updated_by"],
             updated_on = datetime.datetime.utcnow(),
             closed_on = None,
-            closed_by = None
+            closed_by = None,
             project= None
 
         )
