@@ -58,7 +58,7 @@ def index():
             status = content["status"],
             tag = content["tag"],
             priority = content["priority"],
-            team = content["team"],
+            # team = content["team"],
             assigned_user = content["assigned_user"],
             created_by = content["created_by"],
             updated_by= content["updated_by"],
