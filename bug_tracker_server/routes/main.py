@@ -37,7 +37,6 @@ def index():
                 "status": ticket.status,
                 "tag": ticket.tag,
                 "priority": ticket.priority,
-                "team": ticket.team,
                 "assigned_user": ticket.assigned_user,
                 "created_on": ticket.created_on,
                 "created_by": ticket.created_by,
