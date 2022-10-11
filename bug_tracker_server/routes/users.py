@@ -89,7 +89,7 @@ def login_user():
     
     user = users.User.query.filter_by(username=auth.username).first()  
     if check_password_hash(user.password, auth.password):
-        token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=45)}, app.config['SECRET_KEY'], "HS256"), {"user_id": user.id, "username": user.username}
+        token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=45)}, app.config['SECRET_KEY'], "HS256"), {"user_id": user.id, "username": user.username, "user_type": user.user_type}
         return jsonify({'token': token}), 200
     else:
         return jsonify('could not verify'), 401
