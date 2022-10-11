@@ -77,14 +77,11 @@ def change_todo(id):
     if request.method == "PUT":
         content = request.json
         ticket = Ticket.query.filter_by(id=id).first()
-        ticket.title = content["title"]
-        ticket.description = content["description"]
         ticket.status = content["status"]
-        ticket.tag = content["tag"]
-        ticket.priority = content["priority"]
-        ticket.assigned_user = content["assigned_user"]
         ticket.updated_by = content["updated_by"]
         ticket.updated_on = datetime.datetime.utcnow()
+        ticket.closed_on = datetime.datetime.utcnow()
+        ticket.closed_by = content["closed_by"]
 
         db.session.commit()
         return jsonify({"message": "Ticket updated successfully."}), 200
