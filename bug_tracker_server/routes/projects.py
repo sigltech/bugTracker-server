@@ -48,7 +48,10 @@ def index():
             description = content["description"],
             team = content["team"],
             date = datetime.datetime.utcnow(),
-            users = content["users"]
+            users = content["users"],
+            projected_completion_date = content["projected_completion_date"],
+            completed_on = content["completed_on"],
+            completed_by = content["completed_by"]
         )
         db.session.add(project)
         db.session.commit()
