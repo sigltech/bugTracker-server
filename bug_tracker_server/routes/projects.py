@@ -47,7 +47,8 @@ def index():
             name = content["name"],
             description = content["description"],
             team = content["team"],
-            # date = datetime.datetime.utcnow()
+            date = datetime.datetime.utcnow(),
+            users = content["users"]
         )
         db.session.add(project)
         db.session.commit()
