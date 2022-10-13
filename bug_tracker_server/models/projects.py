@@ -6,7 +6,7 @@ class Project(db.Model):
     id = db.Column(db.String(80), primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(120), nullable=False)
-    ceated_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    ceated_on = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now)
     users = db.Column(db.ARRAY(db.String(80)))
     completed_on = db.Column(db.DateTime, nullable=True)
     completed_by = db.Column(db.String(80), nullable=True)

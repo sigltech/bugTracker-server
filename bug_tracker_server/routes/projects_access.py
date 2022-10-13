@@ -45,7 +45,6 @@ def index():
             id = f'{uuid.uuid1()}',
             project = content["project"],
             user = content["user"],
-            # date = datetime.datetime.utcnow()
         )
         db.session.add(project_access)
         db.session.commit()
