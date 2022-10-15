@@ -62,7 +62,7 @@ def index():
             assigned_user = content["assigned_user"],
             created_by = content["created_by"],
             updated_by= content["updated_by"],
-            updated_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+            updated_on = datetime.datetime.now(),
             closed_on = None,
             closed_by = None,
             project= None
@@ -79,8 +79,8 @@ def change_todo(id):
         ticket = Ticket.query.filter_by(id=id).first()
         ticket.status = content["status"]
         ticket.updated_by = content["updated_by"]
-        ticket.updated_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        ticket.closed_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        ticket.updated_on = datetime.datetime.now()
+        ticket.closed_on = datetime.datetime.now()
         ticket.closed_by = content["closed_by"]
 
         db.session.commit()
