@@ -79,8 +79,8 @@ def change_todo(id):
         ticket = Ticket.query.filter_by(id=id).first()
         ticket.status = content["status"]
         ticket.updated_by = content["updated_by"]
-        ticket.updated_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%m:%S")
-        ticket.closed_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%m:%S")
+        ticket.updated_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        ticket.closed_on = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         ticket.closed_by = content["closed_by"]
 
         db.session.commit()

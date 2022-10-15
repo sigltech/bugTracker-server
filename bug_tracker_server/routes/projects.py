@@ -47,7 +47,7 @@ def index():
             name = content["name"],
             description = content["description"],
             team = content["team"],
-            date = datetime.datetime.now().strftime("%d/%m/%Y %H:%m:%S"),
+            date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
             users = content["users"],
             projected_completion_date = content["projected_completion_date"],
             completed_on = content["completed_on"],
