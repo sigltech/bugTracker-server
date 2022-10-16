@@ -34,8 +34,10 @@ def index():
                 "id": project.id,
                 "name": project.name,
                 "description": project.description,
-                "team": project.team,
-                "date": project.date
+                "created_on": project.created_on,
+                "completed_on": project.completed_on,
+                "completed_by": project.completed_by,
+                "projected_completion_date": project.projected_completion_date
             }
         all_projects = Project.query.all()
         return jsonify([*map(projects_serializer, all_projects)]),200
@@ -47,10 +49,10 @@ def index():
             name = content["name"],
             description = content["description"],
             date = datetime.datetime.now(),
-            users = content["users"],
             projected_completion_date = content["projected_completion_date"],
             completed_on = content["completed_on"],
-            completed_by = content["completed_by"]
+            completed_by = content["completed_by"],
+            projected_completion_date = content["projected_completion_date"]
         )
         db.session.add(project)
         db.session.commit()
@@ -65,8 +67,11 @@ def project(id):
                 "id": project.id,
                 "name": project.name,
                 "description": project.description,
-                "team": project.team,
-                "date": project.date
+                "created_on": project.created_on,
+                "completed_on": project.completed_on,
+                "completed_by": project.completed_by,
+                "projected_completion_date": project.projected_completion_date
+
             }),200
         else:
             return jsonify({"message": "project not found"}),404
@@ -76,7 +81,7 @@ def project(id):
             content = request.json
             project.name = content["name"]
             project.description = content["description"]
-            project.team = content["team"]
+
             db.session.commit()
             return jsonify({"message": "project updated successfully"}),200
         else:
