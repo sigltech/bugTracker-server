@@ -46,7 +46,6 @@ def index():
             id = f'{uuid.uuid1()}',
             name = content["name"],
             description = content["description"],
-            team = content["team"],
             date = datetime.datetime.now(),
             users = content["users"],
             projected_completion_date = content["projected_completion_date"],
